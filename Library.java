@@ -141,26 +141,72 @@ public class Library {
     }
  
     public static void main(String[] args) {
+         Scanner sc = new Scanner(System.in);
         Library library = new Library();
+        boolean running = true;
 
-        // Add some books
-        library.addBook("Data Structures", 2);
-        library.addBook("Operating Systems", 1);
+        System.out.println(" Welcome to the Library System!");
 
-        // Add some users
-        library.addUser("U1");
-        library.addUser("U2");
-        library.addUser("U3");
+        while (running) {
+            System.out.println("\n---- MENU ----");
+            System.out.println("1. Add Book");
+            System.out.println("2. Add User");
+            System.out.println("3. Borrow Book");
+            System.out.println("4. Return Book");
+            System.out.println("5. Check Book Availability");
+            System.out.println("6. View Borrowed Books");
+            System.out.println("7. Exit");
+            System.out.print("Enter your choice: ");
 
-        // Borrow operations
-        library.borrowBook("U1", "Data Structures");
-        library.borrowBook("U2", "Data Structures");
-        library.borrowBook("U3", "Data Structures"); // Waitlist
+            int choice = sc.nextInt();
+            sc.nextLine(); // consume newline
 
-        // Return operation (U1 returns the book)
-        library.returnBook("U1", "Data Structures"); // Should assign to U3
+            switch (choice) {
+                case 1 -> {
+                    System.out.print("Enter book title: ");
+                    String title = sc.nextLine();
+                    System.out.print("Enter number of copies: ");
+                    int copies = sc.nextInt();
+                    library.addBook(title, copies);
+                }
+                case 2 -> {
+                    System.out.print("Enter user ID: ");
+                    String userId = sc.nextLine();
+                    library.addUser(userId);
+                }
+                case 3 -> {
+                    System.out.print("Enter user ID: ");
+                    String userId = sc.nextLine();
+                    System.out.print("Enter book title: ");
+                    String title = sc.nextLine();
+                    library.borrowBook(userId, title);
+                }
+                case 4 -> {
+                    System.out.print("Enter user ID: ");
+                    String userId = sc.nextLine();
+                    System.out.print("Enter book title: ");
+                    String title = sc.nextLine();
+                    library.returnBook(userId, title);
+                }
+                case 5 -> {
+                    System.out.print("Enter book title to check: ");
+                    String title = sc.nextLine();
+                    library.checkAvailability(title);
+                }
+                case 6 -> {
+                    System.out.print("Enter user ID: ");
+                    String userId = sc.nextLine();
+                    library.viewBorrowedBooks(userId);
+                }
+                case 7 -> {
+                    System.out.println("Exiting Library System. Goodbye!");
+                    running = false;
+                }
+                default -> System.out.println("Invalid choice. Try again.");
+            }
+        }
 
-        // View borrowed books
-        library.viewBorrowedBooks("U3");
+        sc.close();
     }
 }
+
