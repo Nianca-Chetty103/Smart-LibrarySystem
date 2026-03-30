@@ -18,5 +18,5 @@ Such as queues, hash maps and lists / linked lists.
 - keeps track of fines of people who return books late.
 - gets faster results on fetching information.
 
-## Tech Stack
+## Tech Stack 📚
 - Java using netbeans IDE.
